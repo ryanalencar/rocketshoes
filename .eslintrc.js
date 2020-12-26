@@ -1,0 +1,28 @@
+module.exports = {
+  env: {
+    browser: true,
+    es2021: true
+  },
+  extends: ['plugin:react/recommended', 'airbnb', 'prettier', 'prettier/react'],
+  parser: 'babel-eslint',
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true
+    },
+    ecmaVersion: 12,
+    sourceType: 'module'
+  },
+  plugins: ['react', 'prettier'],
+  rules: {
+    'prettier/prettier': 'error',
+    'space-before-function-paren': 'off',
+    'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx'] }],
+    'react/react-in-jsx-scope': 'off',
+    'class-methods-use-this': 'off',
+    'no-console': 'warn',
+    'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+    'import/prefer-default-export': 'off',
+    'import/no-extraneous-dependencies': ['error', { devDependencies: true }]
+    // 'no-use-before-define': 'off'
+  }
+}
