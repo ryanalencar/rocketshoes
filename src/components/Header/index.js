@@ -5,7 +5,6 @@ import { Container, Cart } from './styles'
 import logo from '../../assets/images/logo.svg'
 
 export default function Header() {
-  console.log(logo)
   return (
     <Container>
       <Link to="/">

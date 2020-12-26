@@ -4,12 +4,13 @@
   "private": true,
   "husky": {
     "hooks": {
-      "pre-commit": "echo 'TESTE'"
+      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
     "*.js": [
       "eslint --fix",
+      "cross-env CI=true yarn test --bail --findRelatedTests",
       "git add"
     ]
   },
@@ -52,6 +53,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
+    "cross-env": "^7.0.3",
     "eslint": "^7.16.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^7.1.0",
@@ -61,6 +63,7 @@
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4.2.0",
     "husky": "^4.3.6",
+    "lint-staged": "^10.5.3",
     "prettier": "^2.2.1"
   }
 }
