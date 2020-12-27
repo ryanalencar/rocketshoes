@@ -5,7 +5,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "commit-msg": "commitlint -E HUSKY_GET_PARAMS"
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
   "lint-staged": {
@@ -19,7 +19,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint --fix src --ext js --ext ts"
+    "lint": "eslint --fix src --ext js --ext ts",
+    "commit": "git-cz"
   },
   "eslintConfig": {
     "extends": [
@@ -55,7 +56,9 @@
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
     "babel-eslint": "^10.1.0",
+    "commitizen": "^4.2.2",
     "cross-env": "^7.0.3",
+    "cz-conventional-changelog": "3.3.0",
     "eslint": "^7.16.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^7.1.0",
@@ -67,5 +70,10 @@
     "husky": "^4.3.6",
     "lint-staged": "^10.5.3",
     "prettier": "^2.2.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
