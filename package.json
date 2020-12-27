@@ -4,7 +4,8 @@
   "private": true,
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GET_PARAMS"
     }
   },
   "lint-staged": {
@@ -51,6 +52,8 @@
     "web-vitals": "^0.2.4"
   },
   "devDependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
     "babel-eslint": "^10.1.0",
     "cross-env": "^7.0.3",
     "eslint": "^7.16.0",
