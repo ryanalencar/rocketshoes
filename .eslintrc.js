@@ -22,7 +22,27 @@ module.exports = {
     'no-console': 'warn',
     'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     'import/prefer-default-export': 'off',
-    'import/no-extraneous-dependencies': ['error', { devDependencies: true }]
-    // 'no-use-before-define': 'off'
+    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    'jsx-a11y/control-has-associated-label': [
+      2,
+      {
+        labelAttributes: ['label'],
+        controlComponents: ['CustomComponent'],
+        ignoreElements: ['audio', 'canvas', 'embed', 'input', 'textarea', 'tr', 'video', 'th'],
+        ignoreRoles: [
+          'grid',
+          'listbox',
+          'menu',
+          'menubar',
+          'radiogroup',
+          'row',
+          'tablist',
+          'toolbar',
+          'tree',
+          'treegrid'
+        ],
+        depth: 3
+      }
+    ]
   }
 }
