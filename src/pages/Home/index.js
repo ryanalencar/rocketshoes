@@ -1,21 +1,38 @@
-import React from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { MdShoppingCart } from 'react-icons/md'
+
+import { formatPrice } from '../../util/format'
+import { getProducts } from '../../services/product'
+import { useIsMounted } from '../../components/commom/customHooks'
 
 import { ProductList } from './styles'
 
 export default function Home() {
-  const products = ['nike', 'adidas', 'aaaa', 'bbbb', 'ccccc', 'dddd']
+  const isMounted = useIsMounted()
+  const [products, setProducts] = useState([])
+
+  const fetchData = useCallback(async () => {
+    const response = await getProducts()
+    const data = response.map(product => ({
+      ...product,
+      price: formatPrice(product.price)
+    }))
+    if (isMounted && data) {
+      setProducts(data)
+    }
+  }, [isMounted])
+
+  useEffect(() => {
+    fetchData()
+  }, [fetchData])
 
   return (
     <ProductList>
-      {products.map((product, index) => (
-        <li key={`tenis${product[index]}`}>
-          <img
-            src="https://static.netshoes.com.br/produtos/tenis-nike-revolution-5-masculino/26/HZM-1731-026/HZM-1731-026_detalhe1.jpg?ts=1571078789?ims=280x280"
-            alt="Tenis"
-          />
-          <strong>Tênis NIKE</strong>
-          <span>R$500,00</span>
+      {products.map(product => (
+        <li key={product.id}>
+          <img src={product.image} alt={product.title} />
+          <strong>{product.title}</strong>
+          <span>{product.price}</span>
 
           <button type="button">
             <div>
