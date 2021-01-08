@@ -1,14 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-// import { Container } from './styles';
+import { Button as Btn } from './styles'
 
 function Button({ text, icon }) {
   return (
-    <button type="button">
+    <Btn type="button">
       {icon && <div>{icon}</div>}
       {text && <span>{text}</span>}
-    </button>
+    </Btn>
   )
 }
 

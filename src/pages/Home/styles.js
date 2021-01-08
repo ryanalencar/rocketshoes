@@ -32,16 +32,9 @@ export const ProductList = styled.ul`
       margin: 5px 0 20px;
     }
     button {
-      background: #7159c1;
-      color: #fff;
-      border: 0;
-      border-radius: 4px;
       overflow: hidden;
       margin-top: auto;
-      transform: background 0.3s;
-
-      display: flex;
-      align-items: center;
+      transition: background 0.3s;
 
       &:hover {
         background: ${darken(0.03, '#7159c1')};

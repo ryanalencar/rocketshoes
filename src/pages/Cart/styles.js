@@ -13,17 +13,10 @@ export const Container = styled.div`
     align-items: center;
 
     button {
-      background: #7159c1;
-      color: #fff;
-      border: 0;
-      border-radius: 4px;
       padding: 12px 20px;
       font-weight: bold;
       text-transform: uppercase;
-      transform: background 0.3s;
-
-      display: flex;
-      align-items: center;
+      transition: background 0.3s;
 
       &:hover {
         background: ${darken(0.03, '#7159c1')};
