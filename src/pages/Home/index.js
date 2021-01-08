@@ -4,6 +4,7 @@ import { MdShoppingCart } from 'react-icons/md'
 import { formatPrice } from '../../util/format'
 import { getProducts } from '../../services/product'
 import { useIsMounted } from '../../components/commom/customHooks'
+import Button from '../../components/Button'
 
 import { ProductList } from './styles'
 
@@ -34,12 +35,7 @@ export default function Home() {
           <strong>{product.title}</strong>
           <span>{product.price}</span>
 
-          <button type="button">
-            <div>
-              <MdShoppingCart size={16} color="#FFF" /> 3
-            </div>
-            <span>ADICIONAR AO CARRINHO</span>
-          </button>
+          <Button icon={<MdShoppingCart size={16} color="#FFF" />} text="ADICIONAR AO CARRINHO" />
         </li>
       ))}
     </ProductList>
