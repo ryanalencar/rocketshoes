@@ -19,10 +19,10 @@ module.exports = {
     'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx'] }],
     'react/react-in-jsx-scope': 'off',
     'class-methods-use-this': 'off',
-    'no-console': 'warn',
     'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     'import/prefer-default-export': 'off',
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    'no-console': ['error', { allow: ['tron'] }],
     'jsx-a11y/control-has-associated-label': [
       2,
       {
