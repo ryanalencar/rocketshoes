@@ -22,7 +22,8 @@ module.exports = {
     'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     'import/prefer-default-export': 'off',
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
-    'no-console': ['error', { allow: ['tron'] }],
+    'no-console': ['error', { allow: ['tron', 'log'] }],
+    'no-param-reassign': 'off',
     'jsx-a11y/control-has-associated-label': [
       2,
       {
