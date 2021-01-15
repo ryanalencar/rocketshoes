@@ -7,7 +7,14 @@ import Button from '../../components/Button'
 
 import { Container, Total, ProductTable } from './styles'
 
-function Cart({ cart }) {
+function Cart({ cart, dispatch }) {
+  const handleRemoveProduct = prodId => {
+    dispatch({
+      type: 'REMOVE_FROM_CART',
+      id: prodId
+    })
+  }
+
   return (
     <Container>
       <ProductTable>
@@ -41,7 +48,10 @@ function Cart({ cart }) {
                 <strong>R$258,80</strong>
               </td>
               <td>
-                <Button icon={<MdDelete size={20} color="#7159C1" />} />
+                <Button
+                  icon={<MdDelete size={20} color="#7159C1" />}
+                  onClick={() => handleRemoveProduct(product.id)}
+                />
               </td>
             </tr>
           ))}
@@ -67,9 +77,11 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps)(Cart)
 
 Cart.defaultProps = {
-  cart: []
+  cart: [],
+  dispatch: null
 }
 
 Cart.propTypes = {
-  cart: PropTypes.instanceOf(Array)
+  cart: PropTypes.instanceOf(Array),
+  dispatch: PropTypes.func
 }
