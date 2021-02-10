@@ -1,18 +1,17 @@
 import React from 'react'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { MdRemoveCircleOutline, MdAddCircleOutline, MdDelete } from 'react-icons/md'
 
-import Button from '../../components/Button'
+import * as CartActions from '../../store/modules/cart/actions'
 
+import Button from '../../components/Button'
 import { Container, Total, ProductTable } from './styles'
 
-function Cart({ cart, dispatch }) {
+function Cart({ cart, removeFromCart }) {
   const handleRemoveProduct = prodId => {
-    dispatch({
-      type: 'REMOVE_FROM_CART',
-      id: prodId
-    })
+    removeFromCart(prodId)
   }
 
   return (
@@ -70,18 +69,18 @@ function Cart({ cart, dispatch }) {
   )
 }
 
-const mapStateToProps = state => ({
-  cart: state.cart
-})
+const mapStateToProps = state => ({ cart: state.cart })
 
-export default connect(mapStateToProps)(Cart)
+const mapDispatchToProps = dispatch => bindActionCreators(CartActions, dispatch)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart)
 
 Cart.defaultProps = {
   cart: [],
-  dispatch: null
+  removeFromCart: null
 }
 
 Cart.propTypes = {
   cart: PropTypes.instanceOf(Array),
-  dispatch: PropTypes.func
+  removeFromCart: PropTypes.func
 }

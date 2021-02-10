@@ -1,7 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { MdShoppingCart } from 'react-icons/md'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+
+import * as CartActions from '../../store/modules/cart/actions'
 
 import { formatPrice } from '../../util/format'
 import { getProducts } from '../../services/product'
@@ -10,7 +13,7 @@ import Button from '../../components/Button'
 
 import { ProductList } from './styles'
 
-function Home({ dispatch }) {
+function Home({ addToCart }) {
   const isMounted = useIsMounted()
   const [products, setProducts] = useState([])
 
@@ -30,10 +33,7 @@ function Home({ dispatch }) {
   }, [fetchData])
 
   const handleAddProduct = product => {
-    dispatch({
-      type: 'ADD_TO_CART',
-      product
-    })
+    addToCart(product)
   }
 
   return (
@@ -55,12 +55,14 @@ function Home({ dispatch }) {
   )
 }
 
-export default connect()(Home)
+const mapDispatchToProps = dispatch => bindActionCreators(CartActions, dispatch)
+
+export default connect(null, mapDispatchToProps)(Home)
 
 Home.defaultProps = {
-  dispatch: null
+  addToCart: null
 }
 
 Home.propTypes = {
-  dispatch: PropTypes.func
+  addToCart: PropTypes.func
 }
