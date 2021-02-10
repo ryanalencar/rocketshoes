@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 
 import { Button as Btn } from './styles'
 
-function Button({ text, icon, onClick }) {
+function Button({ text, icon, onClick, ...rest }) {
   return (
-    <Btn type="button" onClick={onClick}>
+    <Btn type="button" onClick={onClick} {...rest}>
       {icon && <div>{icon}</div>}
       {text && <span>{text}</span>}
     </Btn>

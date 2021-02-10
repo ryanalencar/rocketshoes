@@ -9,9 +9,15 @@ import * as CartActions from '../../store/modules/cart/actions'
 import Button from '../../components/Button'
 import { Container, Total, ProductTable } from './styles'
 
-function Cart({ cart, removeFromCart }) {
-  const handleRemoveProduct = prodId => {
-    removeFromCart(prodId)
+function Cart({ cart, removeFromCart, updateAmount }) {
+  const increment = product => {
+    const { id, amount } = product
+    updateAmount(id, amount + 1)
+  }
+
+  const decrement = product => {
+    const { id, amount } = product
+    updateAmount(id, amount - 1)
   }
 
   return (
@@ -38,9 +44,15 @@ function Cart({ cart, removeFromCart }) {
               </td>
               <td>
                 <div>
-                  <Button icon={<MdRemoveCircleOutline size={20} color="#7159C1" />} />
+                  <Button
+                    onClick={() => decrement(product)}
+                    icon={<MdRemoveCircleOutline size={20} color="#7159C1" />}
+                  />
                   <input type="number" readOnly value={product.amount} />
-                  <Button icon={<MdAddCircleOutline size={20} color="#7159C1" />} />
+                  <Button
+                    onClick={() => increment(product)}
+                    icon={<MdAddCircleOutline size={20} color="#7159C1" />}
+                  />
                 </div>
               </td>
               <td>
@@ -49,7 +61,7 @@ function Cart({ cart, removeFromCart }) {
               <td>
                 <Button
                   icon={<MdDelete size={20} color="#7159C1" />}
-                  onClick={() => handleRemoveProduct(product.id)}
+                  onClick={() => removeFromCart(product.id)}
                 />
               </td>
             </tr>
@@ -77,10 +89,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(Cart)
 
 Cart.defaultProps = {
   cart: [],
-  removeFromCart: null
+  removeFromCart: () => {},
+  updateAmount: () => {}
 }
 
 Cart.propTypes = {
   cart: PropTypes.instanceOf(Array),
-  removeFromCart: PropTypes.func
+  removeFromCart: PropTypes.func,
+  updateAmount: PropTypes.func
 }

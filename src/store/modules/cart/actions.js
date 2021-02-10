@@ -1,6 +1,7 @@
 export const cartActions = {
-  addToCart: 'ADD_TO_CART',
-  removeFromCart: 'REMOVE_FROM_CART'
+  addToCart: '@cart/ADD',
+  removeFromCart: '@cart/REMOVE',
+  updateAmount: '@cart/UPDATE_AMOUNT'
 }
 
 export function addToCart(product) {
@@ -14,5 +15,13 @@ export function removeFromCart(id) {
   return {
     type: cartActions.removeFromCart,
     id
+  }
+}
+
+export function updateAmount(id, amount) {
+  return {
+    type: cartActions.updateAmount,
+    id,
+    amount
   }
 }
