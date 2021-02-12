@@ -8,8 +8,9 @@ import * as CartActions from '../../store/modules/cart/actions'
 
 import Button from '../../components/Button'
 import { Container, Total, ProductTable } from './styles'
+import { formatPrice } from '../../util/format'
 
-function Cart({ cart, removeFromCart, updateAmount }) {
+function Cart({ cart, removeFromCart, updateAmount, total }) {
   const increment = product => {
     const { id, amount } = product
     updateAmount(id, amount + 1)
@@ -40,7 +41,7 @@ function Cart({ cart, removeFromCart, updateAmount }) {
               </td>
               <td>
                 <strong>{product.title}</strong>
-                <span>{product.price}</span>
+                <span>{formatPrice(product.price)}</span>
               </td>
               <td>
                 <div>
@@ -56,7 +57,7 @@ function Cart({ cart, removeFromCart, updateAmount }) {
                 </div>
               </td>
               <td>
-                <strong>R$258,80</strong>
+                <strong>{formatPrice(product.subtotal)}</strong>
               </td>
               <td>
                 <Button
@@ -74,14 +75,17 @@ function Cart({ cart, removeFromCart, updateAmount }) {
 
         <Total>
           <span>TOTAL</span>
-          <strong>R$1920,25</strong>
+          <strong>{formatPrice(total)}</strong>
         </Total>
       </footer>
     </Container>
   )
 }
 
-const mapStateToProps = state => ({ cart: state.cart })
+const mapStateToProps = state => ({
+  cart: state.cart.map(product => ({ ...product, subtotal: product.price * product.amount })),
+  total: state.cart.reduce((total, product) => total + product.price * product.amount, 0)
+})
 
 const mapDispatchToProps = dispatch => bindActionCreators(CartActions, dispatch)
 
@@ -90,11 +94,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(Cart)
 Cart.defaultProps = {
   cart: [],
   removeFromCart: () => {},
-  updateAmount: () => {}
+  updateAmount: () => {},
+  total: 0
 }
 
 Cart.propTypes = {
   cart: PropTypes.instanceOf(Array),
   removeFromCart: PropTypes.func,
-  updateAmount: PropTypes.func
+  updateAmount: PropTypes.func,
+  total: PropTypes.number
 }

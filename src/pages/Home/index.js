@@ -21,7 +21,7 @@ function Home({ addToCart }) {
     const response = await getProducts()
     const data = response.map(product => ({
       ...product,
-      price: formatPrice(product.price)
+      price: product.price
     }))
     if (isMounted && data) {
       setProducts(data)
@@ -42,7 +42,7 @@ function Home({ addToCart }) {
         <li key={product.id}>
           <img src={product.image} alt={product.title} />
           <strong>{product.title}</strong>
-          <span>{product.price}</span>
+          <span>{formatPrice(product.price)}</span>
 
           <Button
             icon={<MdShoppingCart size={16} color="#FFF" />}
