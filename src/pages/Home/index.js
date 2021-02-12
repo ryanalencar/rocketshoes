@@ -13,7 +13,7 @@ import Button from '../../components/Button'
 
 import { ProductList } from './styles'
 
-function Home({ addToCart }) {
+function Home({ addToCart, amount }) {
   const isMounted = useIsMounted()
   const [products, setProducts] = useState([])
 
@@ -47,6 +47,7 @@ function Home({ addToCart }) {
           <Button
             icon={<MdShoppingCart size={16} color="#FFF" />}
             text="ADICIONAR AO CARRINHO"
+            amount={amount[product.id] || 0}
             onClick={() => handleAddProduct(product)}
           />
         </li>
@@ -55,14 +56,23 @@ function Home({ addToCart }) {
   )
 }
 
+const mapStateToProps = state => ({
+  amount: state.cart.reduce((amount, product) => {
+    amount[product.id] = product.amount
+    return amount
+  }, {})
+})
+
 const mapDispatchToProps = dispatch => bindActionCreators(CartActions, dispatch)
 
-export default connect(null, mapDispatchToProps)(Home)
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
 
 Home.defaultProps = {
-  addToCart: null
+  addToCart: null,
+  amount: {}
 }
 
 Home.propTypes = {
-  addToCart: PropTypes.func
+  addToCart: PropTypes.func,
+  amount: PropTypes.object
 }

@@ -25,6 +25,7 @@ module.exports = {
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     'no-console': ['error', { allow: ['tron', 'log'] }],
     'no-param-reassign': 'off',
+    'react/forbid-prop-types': 'off',
     'jsx-a11y/control-has-associated-label': [
       2,
       {
