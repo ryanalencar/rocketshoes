@@ -13,9 +13,9 @@ import Button from '../../components/Button'
 
 import { ProductList } from './styles'
 
-function Home({ addToCart, amount }) {
-  const isMounted = useIsMounted()
+function Home({ addToCartRequest, amount }) {
   const [products, setProducts] = useState([])
+  const isMounted = useIsMounted()
 
   const fetchData = useCallback(async () => {
     const response = await getProducts()
@@ -32,8 +32,8 @@ function Home({ addToCart, amount }) {
     fetchData()
   }, [fetchData])
 
-  const handleAddProduct = product => {
-    addToCart(product)
+  const handleAddProduct = id => {
+    addToCartRequest(id)
   }
 
   return (
@@ -48,7 +48,7 @@ function Home({ addToCart, amount }) {
             icon={<MdShoppingCart size={16} color="#FFF" />}
             text="ADICIONAR AO CARRINHO"
             amount={amount[product.id] || 0}
-            onClick={() => handleAddProduct(product)}
+            onClick={() => handleAddProduct(product.id)}
           />
         </li>
       ))}
@@ -68,11 +68,11 @@ const mapDispatchToProps = dispatch => bindActionCreators(CartActions, dispatch)
 export default connect(mapStateToProps, mapDispatchToProps)(Home)
 
 Home.defaultProps = {
-  addToCart: null,
+  addToCartRequest: null,
   amount: {}
 }
 
 Home.propTypes = {
-  addToCart: PropTypes.func,
+  addToCartRequest: PropTypes.func,
   amount: PropTypes.object
 }

@@ -4,7 +4,7 @@ import { cartActions } from './actions'
 export default function cart(state = [], action) {
   const { type } = action
   switch (type) {
-    case cartActions.addToCart:
+    case cartActions.addToCartSuccess:
       return produce(state, draft => {
         const productIndex = draft.findIndex(p => p.id === action.product.id)
         if (productIndex >= 0) {

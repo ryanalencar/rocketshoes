@@ -1,12 +1,20 @@
 export const cartActions = {
-  addToCart: '@cart/ADD',
+  addToCartRequest: '@cart/ADD_REQUEST',
+  addToCartSuccess: '@cart/ADD_SUCCESS',
   removeFromCart: '@cart/REMOVE',
   updateAmount: '@cart/UPDATE_AMOUNT'
 }
 
-export function addToCart(product) {
+export function addToCartRequest(id) {
   return {
-    type: cartActions.addToCart,
+    type: cartActions.addToCartRequest,
+    id
+  }
+}
+
+export function addToCartSuccess(product) {
+  return {
+    type: cartActions.addToCartSuccess,
     product
   }
 }
