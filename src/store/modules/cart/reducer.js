@@ -6,12 +6,7 @@ export default function cart(state = [], action) {
   switch (type) {
     case cartActions.addToCartSuccess:
       return produce(state, draft => {
-        const productIndex = draft.findIndex(p => p.id === action.product.id)
-        if (productIndex >= 0) {
-          draft[productIndex].amount += 1
-        } else {
-          draft.push({ ...action.product, amount: 1 })
-        }
+        draft.push(action.product)
       })
     case cartActions.removeFromCart:
       return produce(state, draft => {
@@ -23,7 +18,8 @@ export default function cart(state = [], action) {
       if (action.amount <= 0) return state
       return produce(state, draft => {
         const productIndex = draft.findIndex(p => p.id === action.id)
-        if (productIndex >= 0) draft[productIndex].amount = Number(action.amount)
+        if (productIndex >= 0)
+          draft[productIndex].amount = Number(action.amount)
       })
     }
     default:
